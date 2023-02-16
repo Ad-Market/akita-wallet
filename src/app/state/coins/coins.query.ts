@@ -1,10 +1,15 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { QueryEntity } from '@datorama/akita';
-import { CoinsStore, CoinsState } from './coins.store';
+import { Query } from '@datorama/akita';
+import { Coin, CoinsState, CoinsStore } from './coins.store';
 
 @Injectable({ providedIn: 'root' })
-export class CoinsQuery extends QueryEntity<CoinsState> {
+export class CoinsQuery extends Query<CoinsState> {
+  readonly allCoins$: Observable<Coin[]>;
+
   constructor(protected override store: CoinsStore) {
     super(store);
+
+    this.allCoins$ = this.select(state => state.data);
   }
 }

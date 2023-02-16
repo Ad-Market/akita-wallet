@@ -23,6 +23,8 @@
     "@angular/router": "^15.0.0",
     "@datorama/akita": "^8.0.1",
     "@datorama/akita-ng-entity-service": "^8.0.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
     "binance": "^2.3.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -40,6 +42,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
+    "autoprefixer": "^10.4.13",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -49,8 +52,10 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-eslint": "^15.0.1",
+    "tailwindcss": "^3.2.6",
     "typescript": "~4.8.2"
   },
   "akitaCli": {

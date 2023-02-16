@@ -1,15 +1,38 @@
 import { Injectable } from '@angular/core';
-import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { Coin } from './coin.model';
+import { Store, StoreConfig } from '@datorama/akita';
 
-export type CoinsState = EntityState<Coin>;
+export interface Status {
+  timestamp?: Date;
+  error_code?: number;
+  error_message?: string;
+  elapsed?: number;
+  notice?: string;
+}
+
+export interface Coin {
+  id: number;
+  name: string;
+  symbol: string;
+  slug: string;
+  rank: number;
+}
+
+export interface CoinsState {
+  status: Status;
+  data: Coin[];
+}
+
+export function createInitialState(): CoinsState {
+  return {
+    status: {},
+    data: [],
+  };
+}
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({
-  name: 'coins',
-})
-export class CoinsStore extends EntityStore<CoinsState> {
+@StoreConfig({ name: 'coins' })
+export class CoinsStore extends Store<CoinsState> {
   constructor() {
-    super();
+    super(createInitialState());
   }
 }
