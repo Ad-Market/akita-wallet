@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   coinmarketcap: {
+    // endpoint: 'https://pro-api.coinmarketcap.com',
     endpoint: 'https://pro-api.coinmarketcap.com',
     API_KEY: '9cfdb617-ace4-4e9a-85c6-d893f85f9e6f',
   },

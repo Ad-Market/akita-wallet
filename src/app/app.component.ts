@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoinsService } from './state/coins';
 
 @Component({
@@ -6,8 +6,14 @@ import { CoinsService } from './state/coins';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'akita-wallet';
 
   constructor(private coinsService: CoinsService) {}
+
+  ngOnInit(): void {
+    this.coinsService.get().subscribe(res => {
+      console.log(res);
+    });
+  }
 }
