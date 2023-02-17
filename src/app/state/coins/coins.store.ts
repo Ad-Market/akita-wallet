@@ -33,7 +33,7 @@ export function createInitialState(): CoinsState {
 @StoreConfig({
   name: 'coins',
   cache: {
-    ttl: 3600000,
+    ttl: 5000,
   },
 })
 export class CoinsStore extends Store<CoinsState> {
