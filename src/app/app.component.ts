@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.coinsService.get();
+    this.coinsService.getSmartCached();
   }
 }

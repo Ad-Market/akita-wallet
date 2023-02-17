@@ -30,7 +30,12 @@ export function createInitialState(): CoinsState {
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'coins' })
+@StoreConfig({
+  name: 'coins',
+  cache: {
+    ttl: 3600000,
+  },
+})
 export class CoinsStore extends Store<CoinsState> {
   constructor() {
     super(createInitialState());
