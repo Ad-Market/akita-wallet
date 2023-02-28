@@ -9,7 +9,7 @@ import { CoinsStore } from '.';
 
 @Injectable({ providedIn: 'root' })
 export class CoinsService {
-  ENDPOINT = 'http://localhost:3000/data'; //environment.coinmarketcap.endpoint;
+  ENDPOINT = 'http://localhost:3000/coins'; //environment.coinmarketcap.endpoint;
   API_KEY = environment.coinmarketcap.API_KEY;
 
   COINS_API = `${this.ENDPOINT}/v1/cryptocurrency/map?CMC_PRO_API_KEY=${this.API_KEY}&sort=cmc_rank&start=1&limit=20`;

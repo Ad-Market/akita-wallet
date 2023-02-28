@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 import { User } from './user.model';
 
-export interface UsersState extends EntityState<User> {
+export interface UsersState extends EntityState<User, number> {
   date: Date;
 }
 

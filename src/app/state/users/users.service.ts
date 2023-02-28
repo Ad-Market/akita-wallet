@@ -15,7 +15,7 @@ export class UsersService {
 
   get() {
     this.http
-      .get('http://localhost:3000/data')
+      .get('http://localhost:3000/users')
       .pipe(tap((entities: any) => this.usersStore.set(entities)))
       .subscribe();
   }
@@ -25,9 +25,11 @@ export class UsersService {
       .selectHasCache()
       .pipe(
         switchMap(hasCache => {
-          const apiCall = this.http
-            .get('http://localhost:3000/data')
-            .pipe(tap((products: any) => this.usersStore.set(products)));
+          const apiCall = this.http.get('http://localhost:3000/users').pipe(
+            tap((products: any) => {
+              this.usersStore.set(products);
+            })
+          );
 
           return hasCache ? EMPTY : apiCall;
         })
