@@ -30,18 +30,14 @@ export interface BinanceStream {
 
 @Injectable({ providedIn: 'root' })
 export class WalletService implements OnDestroy {
-  // private readonly unsubscribe = new BehaviorSubject<boolean>(false);
   private unsubscriber = new Subject();
   isServiceAlive = true;
   constructor(
     private walletStore: WalletStore,
     private coinsQuery: CoinsQuery
-  ) {
-    // this.unsubscribe.subscribe(() => console.error('MORRI'));
-  }
+  ) {}
 
   ngOnDestroy(): void {
-    // this.unsubscribe.next(true);
     this.isServiceAlive = false;
     this.unsubscriber.next(false);
     this.unsubscriber.complete();
@@ -59,6 +55,10 @@ export class WalletService implements OnDestroy {
             ? quantity
             : foundAsset.quantity + quantity;
 
+        state.assets.splice(
+          state.assets.findIndex(a => a.symbol === asset.symbol),
+          1
+        );
         this.walletStore.update({
           consolidatedPosition: 0,
           assets: [...state.assets, foundAsset],
@@ -74,6 +74,7 @@ export class WalletService implements OnDestroy {
     });
 
     streams = streams.substring(0, streams.length - 1);
+    // const streams = 'btcusdt@aggTrade/ethbtcusdt@aggTrade';
 
     webSocket<BinanceStream>(
       'wss://stream.binance.com:443/stream?streams=' + streams

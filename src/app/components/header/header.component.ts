@@ -1,7 +1,6 @@
 import { WalletQuery } from './../../state/wallet/wallet.query';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { WalletState } from 'src/app/state/wallet';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +8,12 @@ import { WalletState } from 'src/app/state/wallet';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  wallet$: Observable<WalletState>;
+  consolidatedPosition$: Observable<number>;
 
   constructor(private walletQuery: WalletQuery) {
-    this.wallet$ = this.walletQuery.wallet$;
+    this.consolidatedPosition$ =
+      this.walletQuery.walletConsolidatedPosition$.pipe(
+        tap((value: number) => value.toFixed(2))
+      );
   }
 }

@@ -9,11 +9,11 @@ export interface Asset {
   quantity?: number;
 }
 
-export interface UserAsset {
-  asset: Asset;
-  boughtPrice: number;
-  quantity: number;
-}
+// export interface UserAsset {
+//   asset: Asset;
+//   boughtPrice: number;
+//   quantity: number;
+// }
 
 export interface WalletState {
   consolidatedPosition: number;
