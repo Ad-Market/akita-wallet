@@ -13,21 +13,21 @@ export class UsersService {
     private http: HttpClient
   ) {}
 
-  get() {
+  get(): void {
     this.http
       .get('http://localhost:3000/users')
       .pipe(tap((entities: any) => this.usersStore.set(entities)))
       .subscribe();
   }
 
-  getCached() {
+  getCached(): void {
     this.usersQuery
       .selectHasCache()
       .pipe(
         switchMap(hasCache => {
           const apiCall = this.http.get('http://localhost:3000/users').pipe(
-            tap((products: any) => {
-              this.usersStore.set(products);
+            tap((users: any) => {
+              this.usersStore.set(users);
             })
           );
 

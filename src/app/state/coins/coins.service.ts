@@ -1,9 +1,8 @@
 import { CoinsQuery } from './coins.query';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { cacheable } from '@datorama/akita';
 import { EMPTY, switchMap, tap } from 'rxjs';
-
+import { cacheable } from '@datorama/akita';
 import { environment } from 'src/environments/environment';
 import { CoinsStore } from '.';
 
