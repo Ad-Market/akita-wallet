@@ -1,12 +1,7 @@
 import { CoinsQuery } from './../coins/coins.query';
 import { Injectable, OnDestroy } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import {
-  distinctUntilChanged,
-  takeUntil,
-  takeWhile,
-  throttleTime,
-} from 'rxjs/operators';
+import { webSocket } from 'rxjs/webSocket';
+import { distinctUntilChanged, takeUntil, throttleTime } from 'rxjs/operators';
 import { Asset, WalletStore } from './wallet.store';
 import { Subject } from 'rxjs';
 
