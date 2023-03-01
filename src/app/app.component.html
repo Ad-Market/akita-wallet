@@ -1,21 +1,18 @@
 <div class="flex flex-col w-screen h-screen">
-  <div class="fixed w-full mb-4 bg-indigo-500 h-14">
-    <div
-      class="flex items-center justify-between w-full h-full px-4 text-white">
-      <div>Akita Wallet</div>
-      <div class="">Money: €0</div>
-    </div>
-  </div>
+  <app-header></app-header>
   <div class="container mx-auto mt-20">
     <div id="list" class="w-full">
       <div class="grid grid-cols-4 gap-6">
         <div
           id="item"
-          class="px-4 py-2 border border-indigo-300 rounded"
+          class="flex flex-row cursor-pointer gap-2 justify-between px-4 py-2 border border-indigo-300 rounded"
           *ngFor="let w of (wallet$ | async)?.assets">
           <div id="symbol" class="">{{ w.symbol }}</div>
           <div id="name" class="">{{ w.name }}</div>
           <div id="price" class="">{{ w.price }}</div>
+          <button class="px-4 py-2 bg-green-600 text-white" (click)="invest(w)">
+            $
+          </button>
         </div>
       </div>
     </div>

@@ -1,8 +1,13 @@
 import { CoinsQuery } from './../coins/coins.query';
 import { Injectable, OnDestroy } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { takeUntil, takeWhile } from 'rxjs/operators';
-import { WalletStore } from './wallet.store';
+import {
+  distinctUntilChanged,
+  takeUntil,
+  takeWhile,
+  throttleTime,
+} from 'rxjs/operators';
+import { Asset, WalletStore } from './wallet.store';
 import { Subject } from 'rxjs';
 
 export interface Data {
@@ -42,6 +47,26 @@ export class WalletService implements OnDestroy {
     this.unsubscriber.complete();
   }
 
+  buyAsset(asset: Asset, quantity: number): void {
+    const state = this.walletStore.getValue();
+
+    if (state) {
+      const foundAsset = state.assets.find(a => a.symbol === asset.symbol);
+
+      if (foundAsset) {
+        foundAsset.quantity =
+          foundAsset?.quantity == null
+            ? quantity
+            : foundAsset.quantity + quantity;
+
+        this.walletStore.update({
+          consolidatedPosition: 0,
+          assets: [...state.assets, foundAsset],
+        });
+      }
+    }
+  }
+
   watchMarket(): void {
     let streams = '';
     this.coinsQuery.getValue().data.forEach(c => {
@@ -53,11 +78,14 @@ export class WalletService implements OnDestroy {
     webSocket<BinanceStream>(
       'wss://stream.binance.com:443/stream?streams=' + streams
     )
-      // .pipe(takeUntil(this.unsubscriber))
+      .pipe(
+        distinctUntilChanged(),
+        throttleTime(1000),
+        takeUntil(this.unsubscriber)
+      )
       .subscribe({
         next: (coin: BinanceStream) => {
           this.walletStore.updateWallet(coin);
-          console.log(coin);
         },
         error: () => console.error('Websocket error'),
         complete: () => console.error('Websocket completed'),

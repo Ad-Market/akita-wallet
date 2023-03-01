@@ -4,9 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, ButtonComponent],
+  declarations: [AppComponent, ButtonComponent, HeaderComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

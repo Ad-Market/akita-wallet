@@ -40,7 +40,6 @@ export class WalletStore extends Store<WalletState> {
 
     if (currentState.assets.find(item => item.symbol === stream.data.s)) {
       assets = structuredClone(currentState.assets);
-      console.log(assets);
       assets.map(item => {
         if (item.symbol === stream.data.s) {
           item.price = stream.data.p;

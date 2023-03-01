@@ -10,6 +10,7 @@ import { Coin } from './state/coins/coins.store';
 import { UsersService } from './state/users';
 import { HashMap } from '@datorama/akita';
 import { WalletState } from './state/wallet';
+import { Asset } from './state/wallet/wallet.store';
 
 @Component({
   selector: 'app-root',
@@ -40,5 +41,13 @@ export class AppComponent implements OnInit {
     this.coinsService.getSmartCached();
     this.userService.getCached();
     this.walletService.watchMarket();
+  }
+
+  invest(asset: Asset) {
+    console.log(asset);
+    const x = prompt('How much do you to buy (' + asset.symbol + ')', '');
+    if (x) {
+      this.walletService.buyAsset(asset, parseInt(x));
+    }
   }
 }
