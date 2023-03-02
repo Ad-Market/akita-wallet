@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { User, UsersQuery } from '.';
+import { UsersQuery } from '.';
 import { UsersStore } from './users.store';
 
 @Injectable({ providedIn: 'root' })
@@ -28,12 +28,16 @@ export class UsersService {
           const apiCall = this.http.get('http://localhost:3000/users').pipe(
             tap((users: any) => {
               this.usersStore.set(users);
+              this.usersStore.setError(null);
             })
           );
 
           return hasCache ? EMPTY : apiCall;
         })
       )
-      .subscribe();
+      .subscribe({
+        error: () =>
+          this.usersStore.setError('Não consegui atualizar os usuarios'),
+      });
   }
 }

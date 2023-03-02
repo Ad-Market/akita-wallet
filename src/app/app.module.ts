@@ -5,10 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent, ButtonComponent, HeaderComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    environment.production
+      ? []
+      : AkitaNgDevtools.forRoot({
+          maxAge: 25,
+        }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

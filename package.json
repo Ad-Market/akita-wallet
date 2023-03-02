@@ -23,6 +23,7 @@
     "@angular/router": "^15.0.0",
     "@datorama/akita": "^8.0.1",
     "@datorama/akita-ng-entity-service": "^8.0.0",
+    "@datorama/akita-ngdevtools": "^7.0.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "binance": "^2.3.2",
